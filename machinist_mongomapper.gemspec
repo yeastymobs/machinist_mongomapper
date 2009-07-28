@@ -16,8 +16,11 @@ Gem::Specification.new do |s|
     ".gitignore",
      "LICENSE",
      "README.md",
+     "Rakefile",
+     "VERSION",
      "init.rb",
-     "lib/machinist/mongomapper.rb"
+     "lib/machinist/mongomapper.rb",
+     "machinist_mongomapper.gemspec"
   ]
   s.homepage = %q{http://github.com/yeastymobs/machinist_mongomapper}
   s.rdoc_options = ["--charset=UTF-8"]
