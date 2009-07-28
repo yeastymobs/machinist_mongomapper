@@ -1,0 +1,1 @@
+require 'machinist/mongomapper' if Rails.env =~ /^test|cucumber$/
