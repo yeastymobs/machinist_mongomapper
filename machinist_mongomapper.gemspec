@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{machinist_mongomapper}
-  s.version = "0.9.1"
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nicolas M\303\251rouze", "Vincent Hellot", "Mathieu Fosse"]
@@ -20,13 +20,19 @@ Gem::Specification.new do |s|
      "VERSION",
      "init.rb",
      "lib/machinist/mongomapper.rb",
-     "machinist_mongomapper.gemspec"
+     "machinist_mongomapper.gemspec",
+     "spec/mongomapper_spec.rb",
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/yeastymobs/machinist_mongomapper}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Machinist adapter for MongoMapper}
+  s.test_files = [
+    "spec/mongomapper_spec.rb",
+     "spec/spec_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
