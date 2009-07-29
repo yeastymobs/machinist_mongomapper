@@ -5,19 +5,19 @@ module Machinist
   
   class MongoMapperAdapter
     def self.has_association?(object, attribute)
-      object.class.associations(attribute)
+      object.class.associations[attribute]
     end
     
     def self.class_for_association(object, attribute)
-      association = object.class.associations(attribute)
+      association = object.class.associations[attribute]
       association && association.klass
     end
     
     def self.assigned_attributes_without_associations(lathe)
       attributes = {}
       lathe.assigned_attributes.each_pair do |attribute, value|
-        association = lathe.object.class.associations(attribute)
-        if association && association.type == :belongs_to
+        association = lathe.object.class.associations[attribute]
+        if association && association.belongs_to?
           attributes[association.belongs_to_key_name.to_sym] = value.id
         else
           attributes[attribute] = value
@@ -41,11 +41,20 @@ module Machinist
     end
 
     def plan(*args)
-      Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
+      lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
+      Machinist::MongoMapperAdapter.assigned_attributes_without_associations(lathe)
+    end
+  end
+  
+  module MongoMapperAssociationsProxyExtensions
+    def nil?
+      self.klass.nil?
     end
   end
 
 end
 
+
+MongoMapper::Associations::Proxy.send(:include, Machinist::MongoMapperAssociationsProxyExtensions)
 MongoMapper::Document::ClassMethods.send(:include, Machinist::Blueprints::ClassMethods)
 MongoMapper::Document::ClassMethods.send(:include, Machinist::MongoMapperExtensions)
