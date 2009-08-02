@@ -28,21 +28,30 @@ module Machinist
   end
 
   module MongoMapperExtensions
-    def make(*args, &block)
-      lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
-      lathe.object.save! unless Machinist.nerfed?
-      lathe.object(&block)
-    end
+    module Document
+      def make(*args, &block)
+        lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
+        lathe.object.save! unless Machinist.nerfed?
+        lathe.object(&block)
+      end
 
-    def make_unsaved(*args)
-      returning(Machinist.with_save_nerfed { make(*args) }) do |object|
-        yield object if block_given?
+      def make_unsaved(*args)
+        returning(Machinist.with_save_nerfed { make(*args) }) do |object|
+          yield object if block_given?
+        end
+      end
+
+      def plan(*args)
+        lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
+        Machinist::MongoMapperAdapter.assigned_attributes_without_associations(lathe)
       end
     end
-
-    def plan(*args)
-      lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
-      Machinist::MongoMapperAdapter.assigned_attributes_without_associations(lathe)
+    
+    module EmbeddedDocument
+      def make(*args, &block)
+        lathe = Lathe.run(Machinist::MongoMapperAdapter, self.new, *args)
+        lathe.object(&block)
+      end
     end
   end
   
@@ -57,4 +66,6 @@ end
 
 MongoMapper::Associations::Proxy.send(:include, Machinist::MongoMapperAssociationsProxyExtensions)
 MongoMapper::Document::ClassMethods.send(:include, Machinist::Blueprints::ClassMethods)
-MongoMapper::Document::ClassMethods.send(:include, Machinist::MongoMapperExtensions)
+MongoMapper::Document::ClassMethods.send(:include, Machinist::MongoMapperExtensions::Document)
+MongoMapper::EmbeddedDocument::ClassMethods.send(:include, Machinist::Blueprints::ClassMethods)
+MongoMapper::EmbeddedDocument::ClassMethods.send(:include, Machinist::MongoMapperExtensions::EmbeddedDocument)
