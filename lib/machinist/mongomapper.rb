@@ -18,7 +18,7 @@ module Machinist
       lathe.assigned_attributes.each_pair do |attribute, value|
         association = lathe.object.class.associations[attribute]
         if association && association.belongs_to?
-          attributes[association.belongs_to_key_name.to_sym] = value.id
+          attributes[association.foreign_key.to_sym] = value.id
         else
           attributes[attribute] = value
         end

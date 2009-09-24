@@ -1,6 +1,14 @@
 require File.dirname(__FILE__) + '/spec_helper'
 require 'machinist/mongomapper'
 
+class Address
+  include MongoMapper::EmbeddedDocument
+  
+  key :street, String
+  key :zip, String
+  key :country, String
+end
+
 class Person
   include MongoMapper::Document
   
@@ -8,6 +16,7 @@ class Person
   key :type, String
   key :password, String
   key :admin, Boolean, :default => false
+  key :address, Address
 end
 
 class Post
@@ -24,12 +33,14 @@ class Comment
   include MongoMapper::Document
   
   key :body, String
+  key :post_id, String
+  key :author_id, String
   
   belongs_to :post
   belongs_to :author, :class_name => "Person"
 end
 
-describe Machinist, "MongoMapper adapter" do 
+describe Machinist, "MongoMapper::Document adapter" do 
 
   before(:each) do
     Person.clear_blueprints!
@@ -104,6 +115,31 @@ describe Machinist, "MongoMapper adapter" do
       post = Post.make_unsaved { comment = Comment.make }
       post.should be_new_record
       comment.should_not be_new_record
+    end
+  end
+
+end
+
+describe Machinist, "MongoMapper::EmbeddedDocument adapter" do 
+
+  before(:each) do
+    Person.clear_blueprints!
+    Address.clear_blueprints!
+  end
+
+  describe "make method" do
+    it "should construct object" do
+      Address.blueprint { }
+      address = Address.make
+      address.should be_instance_of(Address)
+    end
+
+    it "should make an embed object" do
+      Address.blueprint { }
+      Person.blueprint do
+        address { Address.make }
+      end
+      Person.make.address.should be_instance_of(Address)
     end
   end
 
