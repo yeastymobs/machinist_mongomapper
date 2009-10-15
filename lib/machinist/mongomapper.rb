@@ -54,17 +54,9 @@ module Machinist
       end
     end
   end
-  
-  module MongoMapperAssociationsProxyExtensions
-    def nil?
-      self.klass.nil?
-    end
-  end
-
 end
 
 
-MongoMapper::Associations::Proxy.send(:include, Machinist::MongoMapperAssociationsProxyExtensions)
 MongoMapper::Document::ClassMethods.send(:include, Machinist::Blueprints::ClassMethods)
 MongoMapper::Document::ClassMethods.send(:include, Machinist::MongoMapperExtensions::Document)
 MongoMapper::EmbeddedDocument::ClassMethods.send(:include, Machinist::Blueprints::ClassMethods)
