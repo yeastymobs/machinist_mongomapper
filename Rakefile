@@ -10,9 +10,9 @@ begin
     gem.email = "dev@yeastymobs.com"
     gem.homepage = "http://github.com/yeastymobs/machinist_mongomapper"
     gem.authors = ["Nicolas Mérouze", "Vincent Hellot", "Mathieu Fosse", "Cyril Mougel"]
-    
-    gem.add_dependency('notahat-machinist',  '~> 1.0.4')
-    gem.add_dependency('mongo_mapper', '~> 0.5.4')
+
+    gem.add_dependency('machinist',  '~> 1.0.4')
+    gem.add_dependency('mongo_mapper', '~> 0.6.1')
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
