@@ -1,0 +1,27 @@
+h1. MachinistMongomapper
+
+A "Machinist":http://github.com/notahat/machinist adapter for "MongoMapper":http://github.com/jnunemaker/mongomapper.
+
+h2. Usage
+
+Using MachinistMongomapper is simple. Just install the gem;
+
+bc. gem install machinist_mongomapper
+
+And replace the first line of your @blueprints.rb@;
+
+bc. require 'machinist/active_record'
+
+with this;
+
+bc. require 'machinist/mongomapper'
+
+Now you can use Machinist with your Mongo database. Have fun!
+
+h2. Todo
+
+* Write a spec for EmbeddedDocument.
+
+h2. License
+
+Copyright (c) 2009 Yeasty Mobs, released under the MIT license 
