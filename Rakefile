@@ -7,7 +7,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "machinist_mongomapper"
     gem.summary = %Q{Machinist adapter for MongoMapper}
-    gem.email = "dev@yeastymobs.com"
+    gem.email = "nicolas.merouze@gmail.com"
     gem.homepage = "http://github.com/yeastymobs/machinist_mongomapper"
     gem.authors = ["Nicolas Mérouze", "Cyril Mougel"]
 
