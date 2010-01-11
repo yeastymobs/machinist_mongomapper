@@ -22,6 +22,9 @@ h2. Todo
 
 * Write a spec for EmbeddedDocument.
 
-h2. License
+h2. Contributors
 
-Copyright (c) 2009 Yeasty Mobs, released under the MIT license 
+* "Nicolas Mérouze":http://github.com/nmerouze
+* "Cyril Mougel":http://github.com/shingara
+* "Aubrey Holland":http://github.com/aub
+* "Jeff Kreeftmeijer":http://github.com/jeffkreeftmeijer

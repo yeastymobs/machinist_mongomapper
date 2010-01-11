@@ -9,7 +9,7 @@ begin
     gem.summary = %Q{Machinist adapter for MongoMapper}
     gem.email = "dev@yeastymobs.com"
     gem.homepage = "http://github.com/yeastymobs/machinist_mongomapper"
-    gem.authors = ["Nicolas Mérouze", "Vincent Hellot", "Mathieu Fosse", "Cyril Mougel"]
+    gem.authors = ["Nicolas Mérouze", "Cyril Mougel"]
 
     gem.add_dependency('machinist',  '~> 1.0.4')
     gem.add_dependency('mongo_mapper', '~> 0.6.1')
