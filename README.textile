@@ -1,4 +1,8 @@
-h1. MachinistMongomapper
+h1. WARNING
+
+This repo has been discontinued. Please use "machinist_mongo":http://github.com/nmerouze/machinist_mongo now.
+
+h1. Machinist Mongomapper
 
 A "Machinist":http://github.com/notahat/machinist adapter for "MongoMapper":http://github.com/jnunemaker/mongomapper.
 
